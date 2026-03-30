@@ -34,8 +34,13 @@
             <label for="syllabus">Syllabus</label>
             <input class="form-input" type="text" id="syllabus" name="syllabus">
           </div>
-          <button class="form-button">Lägg till kurs</button>
+          <button class="form-button" id="addCourseButton">Lägg till kurs</button>
         </form>
+        <div>
+        <ul id="errors" class="errors">
+
+        </ul>
+        </div>
       </section>
     </main>
       <footer>
@@ -44,5 +49,6 @@
               <li class="footer-item">Programmering i TypeScript</li>
           </ul>
       </footer>
+      <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
