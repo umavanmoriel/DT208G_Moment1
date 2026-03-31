@@ -7,6 +7,10 @@ interface CourseInfo {
   syllabus: string;
 }
 
+window.onload = () => {
+  visaKurser();
+};
+
 const addCourseButton = document.getElementById('addCourseButton') as HTMLButtonElement | null;
 
 if (addCourseButton) {
@@ -97,4 +101,45 @@ function addCourse(): void {
   successMessage.textContent = 'Kursen är sparad. Se tabellen nedan.';
   successMessage.style.color = 'green';
   errorsElement?.appendChild(successMessage);
+}
+
+function visaKurser(): void {
+  const raw = localStorage.getItem('courseInfo');
+  const courseData: CourseInfo[] = raw ? (JSON.parse(raw) as CourseInfo[]) : [];
+
+  const coursesTable = document.getElementById('coursesTable') as HTMLTableElement | null;
+  if (!coursesTable) {
+    return;
+  }
+
+  // Töm tabellen
+  coursesTable.innerHTML = '';
+
+  courseData.forEach((course: CourseInfo) => {
+    const courseSection = document.createElement('tbody');
+    const courseRow = document.createElement('tr');
+
+    const courseCode = document.createElement('td');
+    const courseCodeText = document.createTextNode(course.code);
+    courseCode.appendChild(courseCodeText);
+    courseRow.appendChild(courseCode);
+
+    const courseName = document.createElement('td');
+    const courseNameText = document.createTextNode(course.name);
+    courseName.appendChild(courseNameText);
+    courseRow.appendChild(courseName);
+
+    const progression = document.createElement('td');
+    const progressionText = document.createTextNode(course.progression);
+    progression.appendChild(progressionText);
+    courseRow.appendChild(progression);
+
+    const syllabus = document.createElement('td');
+    const syllabusText = document.createTextNode(course.syllabus);
+    syllabus.appendChild(syllabusText);
+    courseRow.appendChild(syllabus);
+
+    courseSection.appendChild(courseRow);
+    coursesTable.appendChild(courseSection);
+  });
 }
