@@ -107,16 +107,15 @@ function visaKurser(): void {
   const raw = localStorage.getItem('courseInfo');
   const courseData: CourseInfo[] = raw ? (JSON.parse(raw) as CourseInfo[]) : [];
 
-  const coursesTable = document.getElementById('coursesTable') as HTMLTableElement | null;
-  if (!coursesTable) {
+  const coursesBody = document.getElementById('coursesBody') as HTMLTableElement | null;
+  if (!coursesBody) {
     return;
   }
 
   // Töm tabellen
-  coursesTable.innerHTML = '';
+  coursesBody.innerHTML = '';
 
   courseData.forEach((course: CourseInfo) => {
-    const courseSection = document.createElement('tbody');
     const courseRow = document.createElement('tr');
 
     const courseCode = document.createElement('td');
@@ -139,7 +138,6 @@ function visaKurser(): void {
     syllabus.appendChild(syllabusText);
     courseRow.appendChild(syllabus);
 
-    courseSection.appendChild(courseRow);
-    coursesTable.appendChild(courseSection);
+    coursesBody.appendChild(courseRow);
   });
 }
