@@ -95,6 +95,8 @@ function addCourse(): void {
   progressionInput.value = '';
   syllabusInput.value = '';
 
+  //Anropar funktionen när kursen läggs i localStorage
+  visaKurser();
 
   // Meddelande visar att kursen är spårad
   const successMessage = document.createElement('li');
@@ -138,6 +140,28 @@ function visaKurser(): void {
     syllabus.appendChild(syllabusText);
     courseRow.appendChild(syllabus);
 
+    //Lägger till Radera knapp för att radera kursen
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Radera';
+    deleteButton.className = 'delete-button'; 
+    deleteButton.addEventListener('click', () => deleteCourse(course.code));
+
+    const deleteCell = document.createElement('td');
+    deleteCell.appendChild(deleteButton);
+    courseRow.appendChild(deleteCell);
+
     coursesBody.appendChild(courseRow);
   });
+}
+
+//Funktion för att radera kursen
+function deleteCourse(code: string): void {
+  const raw = localStorage.getItem('courseInfo');
+  const courseInfo: CourseInfo[] = raw ? (JSON.parse(raw) as CourseInfo[]) : [];
+  
+  const updatedCourses = courseInfo.filter(course => course.code !== code);
+  localStorage.setItem('courseInfo', JSON.stringify(updatedCourses));
+
+  //Anropar funkar funktionen när kursen raderas
+  visaKurser();
 }
