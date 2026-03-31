@@ -34,15 +34,18 @@ function addCourse(): void {
 
   // Validering av inputs
   let errors: string[] = [];
-  
-  if (
-    !courseCodeInput ||
-    !courseNameInput ||
-    !progressionInput ||
-    !syllabusInput
-  ) {
-    errors.push('Inputs kunde inte hittas i DOM:en');
+
+  // Kollar om något input saknas
+  const inputNotFound = !courseCodeInput || !courseNameInput || !progressionInput || !syllabusInput;
+  if (inputNotFound) {
+    if (errorsElement) {
+      const errorListItem = document.createElement('li');
+      errorListItem.textContent = 'Ett eller flera inputfält saknas';
+      errorsElement.appendChild(errorListItem);
+    }
+    return;
   }
+  
 
   if (
     courseCodeInput.value === '' ||
