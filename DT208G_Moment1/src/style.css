@@ -138,3 +138,38 @@ footer {
 .footer-item {
   font-size: 0.9rem;
 }
+
+@media (max-width: 600px) {
+  header {
+    padding: 0.75rem 1rem;
+  }
+
+  main {
+    margin: 1rem auto;
+    padding: 1rem;
+    gap: 30px;
+  }
+
+  .addCourse-form {
+    gap: 20px;
+  }
+
+  .form-input {
+    font-size: 14px;
+  }
+
+  .form-button {
+    width: 100%;
+  }
+
+  .courses-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .courses-table th,
+  .courses-table td {
+    padding: 0.4rem 0.5rem;
+    font-size: 14px;
+  }
+}
